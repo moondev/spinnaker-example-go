@@ -1,0 +1,59 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'nebula.ospackage-base'
+
+sourceCompatibility = 1.7
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.9'
+}
+
+repositories { 
+    mavenCentral()
+    jcenter()
+}
+
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath 'com.netflix.nebula:gradle-ospackage-plugin:3.1.0'
+    }
+}
+
+dependencies {
+
+}
+
+task run(type: Exec) {
+    commandLine 'go run app.go'
+}
+
+task build(type: Exec) {
+    commandLine 'go build app.go'
+}
+
+task packDeb(type: Deb, dependsOn: build) {
+
+  packageName = project.name
+  version = '1'
+  release '1'
+
+  from('spinnaker-example-go') {
+    into "/opt/spinnaker-example-go"
+  }
+
+  // installer scripts
+  postUninstall = file('pkg_scripts/postUninstall.sh')
+
+  from(file('pkg_scripts/spinnaker-example-go.conf')) {
+    into('/etc/init')
+    user = 'root'
+    permissionGroup = 'root'
+    fileType = CONFIG | NOREPLACE
+  }
+
+}
