@@ -30,7 +30,7 @@ task packDeb(type: Deb) {
   version = '1'
   release '1'
 
-  from('./spinnaker-example-go') {
+  from('bin') {
     into "/opt"
   }
 
