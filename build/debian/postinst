@@ -1,0 +1,19 @@
+#!/bin/sh -e
+
+ec() {
+    echo "$@" >&2
+    "$@"
+}
+
+case "$1" in
+    configure)
+        
+
+        
+        
+# start services
+start spinnaker-example-go
+
+        
+        ;;
+esac

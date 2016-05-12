@@ -1,0 +1,15 @@
+Source: spinnaker-example-go
+Section: java
+Priority: optional
+Maintainer: cmoon
+Uploaders: 
+Version: 1-1
+Standards-Version: 3.8.3
+Package: spinnaker-example-go
+Provides: spinnaker-example-go
+Homepage: 
+Architecture: all
+Distribution: 
+Depends: 
+Description: spinnaker-example-go
+ 
